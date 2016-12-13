@@ -2,9 +2,13 @@ This document explains interface of this project was designed.
 
   Interface & Data Type of CPLEX
 
-    IloModel                           An LP
-    IloObjective                       Objective Function of an LP
-    IloCplex                           A solution of an LP
+    IloModel                           The LP problem
+     - IloNumVarArray                  The decision variable x
+        - IloNumVar                    An element of the decision variable x
+     - IloRange                        A constraint of the form l <= EXP <= u,
+                                       where EXP is a linear expression
+     - IloObjective                    The objective function
+    IloCplex                           The solution of the LP
     IloBool IloCplex::solve()          Returns IloTrue if feasible,
                                        IloFalse if infeasible (No solution!)
 
