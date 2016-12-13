@@ -1,0 +1,15 @@
+Your program must read the description of the point from input.txt in the
+current working directory, and output a convex combination to output.txt
+in the current working directory.
+The 1st line of input.txt contains the number of vertices n (< 1,000)
+and the number of edges m (< 10,000), separated by a space.
+Each vertex is numbered from 0 to n - 1. Each of the following m lines
+of the input file contains (the numeric IDs of) the two endpoints
+and the value on each edge, in that order, separated by a space.
+The first line of the output file contains the number of spanning trees k
+with nonzero coefficients. The next kn lines represent each of
+those spanning trees: each k lines represent a spanning tree, of which
+the first line contains the weight of the spanning tree, and the following
+n - 1 lines show the two endpoints of each edge in the tree, separated
+by a space. You can assume that the given input is always a point
+in the spanning tree polytope.

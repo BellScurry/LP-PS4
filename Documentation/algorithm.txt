@@ -1,0 +1,5 @@
+DELAYED COLUMN GENERATION
+
+PRIMAL SIMPLEX METHOD
+
+IDEA: (S, y) = (x*, 0) is a basic feasible solution

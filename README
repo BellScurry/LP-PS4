@@ -1,0 +1,26 @@
+     Implementation of Problem Set 4 by Jongho Kim
+
+SEE:
+ - Documents in Documentation/ @ THIS PROJECT
+ - "Introduction to Linear Optimizations",
+    Dimitris Bertsimas, John N. Tsitsiklis
+ - IBM CPLEX: http://www-03.ibm.com/software/products/en/ibmilogcpleoptistud
+
+WHAT PROBLEM I SOLVED?
+  An LP with spanning tree polytope. The difficult thing for solving
+  this problem is that this LP has exponentially many constraints.
+  Data size of all constraints may be even bigger than main memory capacity.
+  If you want to see exact LP I solved, see Documentation/problem.txt
+
+HOW I SOLVED THE PROBLEM?
+ - C++ code using CPLEX
+ - Delayed column generation
+ - Primal simplex method
+ - An Idea: (S, y) = (x*, 0) is a basic feasible solution
+ If you want more detailed explanation, see Documentation/algorithm.txt
+
+HOW TO RUN?
+ 1. Compilation
+      make
+ 2. Run
+      ./ss4
