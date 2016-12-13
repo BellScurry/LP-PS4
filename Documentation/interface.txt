@@ -1,0 +1,26 @@
+This document explains interface of this project was designed.
+
+  Interface & Data Type of CPLEX
+
+    IloModel                           An LP
+    IloObjective                       Objective Function of an LP
+    IloCplex                           A solution of an LP
+    IloBool IloCplex::solve()          Returns IloTrue if feasible,
+                                       IloFalse if infeasible (No solution!)
+
+
+  Interface of THIS PROJECT
+
+    /** @primal_simplex.hh */
+    IloCplex& primal_simplex(const IloModel& givenlp);
+
+     - The only input is the given LP problem
+     - Outputs the solution of the given LP problem
+
+    /** @stpolytope.hh */
+    IloCplex& solve_stpolytope(IloEnv& env, JHGraph givengraph);
+
+     - Two Inputs: 1. IloEnv instance   2. The given graph
+     - With algorithmic view, the only input needed is the given graph
+     - To interact with CPLEX, an IloEnv instance is needed
+     - Returns solution of the given spanning tree polytope LP problem
