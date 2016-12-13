@@ -24,3 +24,9 @@ HOW TO RUN?
       make
  2. Run
       ./ss4
+
+HOW TO MIGRATE THIS PROJECT INTO YOUR PROJECT?
+  It is SO EASY:
+    1. Install CPLEX - You have to know the path it is installed.
+    2. Modify directory options in Makefile.
+  Then compilation will work well
