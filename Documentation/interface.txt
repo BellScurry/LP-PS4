@@ -22,9 +22,10 @@ This document explains interface of this project was designed.
      - Outputs the solution of the given LP problem
 
     /** @stpolytope.hh */
-    IloCplex& solve_stpolytope(IloEnv& env, JHGraph givengraph);
+    IloCplex& solve_stpolytope(IloEnv& env, Wgraph givenwgraph);
 
-     - Two Inputs: 1. IloEnv instance   2. The given graph
-     - With algorithmic view, the only input needed is the given graph
+     - Two Inputs: 1. IloEnv instance   2. The given weighted graph
+     - With algorithmic view, the only input needed is the given
+       weighted graph
      - To interact with CPLEX, an IloEnv instance is needed
      - Returns solution of the given spanning tree polytope LP problem

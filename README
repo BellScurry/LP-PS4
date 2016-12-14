@@ -8,8 +8,8 @@ SEE:
 
 WHAT PROBLEM I SOLVED?
   An LP with spanning tree polytope. The difficult thing for solving
-  this problem is that this LP has exponentially many constraints.
-  Data size of all constraints may be even bigger than main memory capacity.
+  this problem is that this LP has exponentially many slack variables.
+  Data size of all variables may be even bigger than main memory capacity.
   If you want to see exact LP I solved, see Documentation/problem.txt
 
 HOW I SOLVED THE PROBLEM?

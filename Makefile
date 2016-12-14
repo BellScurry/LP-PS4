@@ -11,10 +11,8 @@ CONCERT_ARCH = /home/jongho/.opt/ibm/ILOG/CPLEX_Studio_Community127/concert/lib/
 # Linker Options
 LINKS = -lilocplex -lconcert -lcplex -lpthread
 
-all: ilolplex1
-
-ilolplex1:
-	$(CC) -I$(CPLEX_INCLUDE) -I$(CONCERT_INCLUDE) -L$(CPLEX_ARCH) -L$(CONCERT_ARCH) -DIL_STD ilolpex1.cpp -o ilolpex1 $(LINKS)
+ss4:
+	$(CC) -I$(CPLEX_INCLUDE) -I$(CONCERT_INCLUDE) -L$(CPLEX_ARCH) -L$(CONCERT_ARCH) -DIL_STD stpolytope.cc ss4.cc -o ss4 $(LINKS)
 
 clean:
-	rm ilolpex1 *.lp
+	rm ss4 *.lp
