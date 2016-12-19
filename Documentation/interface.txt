@@ -12,6 +12,14 @@ This document explains interface of this project was designed.
     IloBool IloCplex::solve()          Returns IloTrue if feasible,
                                        IloFalse if infeasible (No solution!)
 
+    void IloCplex::setVectors(const IloNumArray x,
+                              const IloNumArray dj,
+                              const IloNumVarArray var,
+                              const IloNumArray slack,
+                              const IloNumArray pi,
+                              const IloRangeArray rng)
+
+
 
   Interface of THIS PROJECT
 

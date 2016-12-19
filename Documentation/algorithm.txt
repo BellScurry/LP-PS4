@@ -1,7 +1,75 @@
+MASTER ITERATION in DELAYED COLUMN GENERATION
+
+  - Suppose the original problem is
+ 
+      minimize      cx
+      subject to    Ax   =  b
+                     x  >=  0
+
+  INPUT:    1.         A basic feasible solution to the original problem
+            2. A'      A basis matrix associated with the given
+                       basic feasible solution
+
+  OUTPUT:   1.         The optimal solution of the subproblem
+            2.         The basis matrix associated with the optimal solution
+
+  PROCESS:  1. Find entering variable xj.
+               If no entering variable remained, then terminate
+            2. Generate subproblem such that:
+
+                 minimize      c'x'
+                 subject to    A'x'  =  b
+                                 x  >=  0
+
+               where x' is a vector of nonzero variables associated with A'
+               and c'x' is objective function of the generated subproblem
+
+               * REMARK  Note that the basic feasible solution to the
+                         original problem is basic feasible solution to
+                         the subproblem we generate. So we have a starting
+                         point for solving the subproblem
+ 
+            3. Solve the subproblem with given starting point.
+               Return the optimal solution of the subproblem
+
+              
+               * REMARK  Note that the optimal solution of a subproblem is
+                         a basic feasible solution to original problem
+
+
 DELAYED COLUMN GENERATION
+
+ 1. Find a basic feasible solution.
+    If there is no feasible solution, terminate
+
+ 2. Repeat master iterations until no entering variable remain
+    If the problem is unbounded, terminate
+
+ 3. Return optimal solution
+ 
+ * REMARK  Note that every spanning tree polytope problem always has 
+           the optimal solution. So we don't need to care about neither
+           infeasible case nor unbounded case
 
 PRIMAL SIMPLEX METHOD
 
-IDEA: (S, y) = (x*, 0) is a basic feasible solution
+REMARK: (s, y) = (x*, 0) is a basic feasible solution
 
-ALGORITHM
+HEURISTIC
+  We pick arbitrary j...
+  It means that picking largest value among remain spanning tree is OK.
+
+IDEA
+  Sort edges by value?  by degree??
+
+
+ALGORITHM (Delayed Column Generation on Spanning Tree Polytope LP Problem)
+
+  1. Sort edges with largest value to lowest value
+
+  variable  <-  An arbitrary basic feasible solution
+  matrix  <-  An associated basis matrix
+  Repeat master iteration
+
+  *MASTER* Iteration
+    i in I

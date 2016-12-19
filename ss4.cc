@@ -6,14 +6,19 @@
 #include <ilcplex/ilocplex.h>
 #include "stpolytope.hh"
 
+ILOSTLBEGIN
+
 int main (int argc, char **argv)
 {
     IloEnv env;
-    IloModel model(env);
-    IloCplex cplex(model);
     std::ifstream infile("input.txt");
-    Wgraph givenwgraph(infile);
-    givenwgraph.print();
+    STPolytope given_problem(env, infile);
+    given_problem.print();
 
+    IloCplex solution(given_problem.firstSubproblem(env));
+    solution.exportModel("first_subproblem.lp");
+
+    std::cout << solution.solve();
+    
     return 0;
 }
