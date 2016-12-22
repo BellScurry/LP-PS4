@@ -17,8 +17,9 @@ int main (int argc, char **argv)
 
     IloCplex solution(given_problem.firstSubproblem(env));
     solution.exportModel("first_subproblem.lp");
+    solution.solve();
 
-    std::cout << solution.solve();
+    STPolytope::printSol(env, given_problem.tableau, solution);
     
     return 0;
 }

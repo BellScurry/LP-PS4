@@ -1,6 +1,17 @@
 #include "stpolytope.hh"
 
  
+/** static */
+void STPolytope::printSol(IloEnv env, IloNumVarArray tableau, IloCplex cplex, std::ostream& outstream) {
+
+    IloNumArray value(env);
+    outstream << "Solution Status:\t" << cplex.getStatus() << std::endl;
+    outstream << "Solution Value:\t" << cplex.getObjValue() << std::endl;
+
+    cplex.getValues(value, tableau);
+    outstream << "Value:\t" << value << std::endl;
+}
+
 /** 
  *  1. Read graph structure and value of edges from input stream
  *  2. Generate and store xstar (RHS of constraint) 
@@ -10,7 +21,7 @@ STPolytope::STPolytope(IloEnv& env, std::istream& instream) {
     instream >> num_vertex >> num_edge;
     edge = new Edge[num_edge];
 
-    xstar = *new IloRangeArray(env);
+    xstar = IloRangeArray(env);
     char suffix[5];
     for(int j=0; j < num_edge; j++) {
         char rowname[10] = "row";
@@ -19,6 +30,8 @@ STPolytope::STPolytope(IloEnv& env, std::istream& instream) {
         instream >> edge[j].vertex1 >> edge[j].vertex2 >> edge[j].weight;
         xstar.add(IloRange(env, edge[j].weight, edge[j].weight, rowname));
     }
+
+    tableau = IloNumVarArray(env);
 }
 
 void STPolytope::print(std::ostream& outstream) const {
@@ -36,18 +49,18 @@ void STPolytope::print(std::ostream& outstream) const {
     }
 }
 
+
 /**
  *  This method returns the first subproblem in delayed column generation
  *  method. All slack variables (y) will be zero, so corresponding columns
  *  will not join. Only the decision variables (s) will join.
  */
-IloModel STPolytope::firstSubproblem(IloEnv env) const {
+IloModel STPolytope::firstSubproblem(IloEnv env) {
 
     IloModel model(env);
-    IloNumVarArray s(env);          // Decision Variables
-
     IloObjective obj = IloMinimize(env);
   
+    /** Generate cost function & columns of identity matrix */
     for(int j=0; j < num_edge; j++) {
         IloNumColumn col = obj(1.0);
         for(int k=0; k < num_edge; k++) {
@@ -56,12 +69,12 @@ IloModel STPolytope::firstSubproblem(IloEnv env) const {
             else
                 col += xstar[k](1.0);
         }
-        s.add(IloNumVar(col));
+        tableau.add(IloNumVar(col));
         char varname[10] = "s";
         char suffix[5];
         sprintf(suffix, "%d", j+1);
         strcat(varname, suffix);
-        s[j].setName(varname);
+        tableau[j].setName(varname);
     }
 
     model.add(obj);

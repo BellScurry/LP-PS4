@@ -30,19 +30,29 @@ class STPolytope {
     };
 
     public:
-        STPolytope(IloEnv& env, std::istream& instream);
+        static void printSol(IloEnv env, IloNumVarArray tableau, IloCplex cplex, std::ostream& outstream = std::cout);
+        STPolytope(IloEnv& _env, std::istream& instream);
         void print(std::ostream& outstream = std::cout) const;
         IloCplex& masterIteration(IloModel& model);
 
-        IloModel firstSubproblem(IloEnv env) const;
+        IloModel firstSubproblem(IloEnv env);
         IloCplex& solve(IloModel& model, BFSol& startpt);
         BFSol& solve_subproblem(BFSol& bfsol);
         unsigned int num_vertex;
         unsigned int num_edge;
         Edge *edge;
 
-        /** RHS of constraint */
+        /**
+         *  Used as
+         *    1. Constraints
+         *    2. RHS of constraint
+         */
         IloRangeArray xstar;
+
+        /**
+         *
+         */
+        IloNumVarArray tableau;
 };
 
 
